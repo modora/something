@@ -25,7 +25,7 @@
 	// new files getting created as root, but you may need to update the USER_UID
 	// and USER_GID in .devcontainer/Dockerfile to match your user if not 1000.
 	// "runArgs": [ "-u", "vscode" ],
-	"runArgs": [ "-v", "${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh-localhost:ro" ], // copy ssh keys
+	"runArgs": [ "-v", "${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh:ro" ], // copy ssh keys
 
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
