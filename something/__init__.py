@@ -2,6 +2,9 @@ from flask import Flask as _Flask
 
 from . import api
 from . import middleware
+from . import __about__
+
+app_dirs = __about__.app_dirs
 
 app = _Flask(__name__)
 
