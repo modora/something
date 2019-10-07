@@ -1,6 +1,7 @@
 from flask import Flask as _Flask
 
 from . import api
+from . import middleware
 
 app = _Flask(__name__)
 
