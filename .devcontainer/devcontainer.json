@@ -24,12 +24,15 @@
 	// Mount your .ssh folder to /root/.ssh-localhost so we can copy its contents
 	"runArgs": [
 		"-v",
-		"${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh-localhost:ro"
+		"${env:HOME}${env:USERPROFILE}/.ssh:/root/.ssh-localhost:ro",
+		"-e",
+		"SOMETHING_ENV=development"
 	],
 	// Copy the contents to the correct location and set permissions
 	"postCreateCommand": "mkdir -p ~/.ssh && cp -r ~/.ssh-localhost/* ~/.ssh && chmod 700 ~/.ssh && chmod 600 ~/.ssh/* && pip install -r requirements.dev.txt",
 	// Add the IDs of extensions you want installed when the container is created in the array below.
 	"extensions": [
-		"eamodio.gitlens",
+		"ms-python.python",
+		"eamodio.gitlens"
 	]
 }

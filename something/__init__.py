@@ -3,6 +3,7 @@ from flask import Flask as _Flask
 from . import api
 from . import middleware
 from . import __about__
+from . import config
 
 app_dirs = __about__.app_dirs
 

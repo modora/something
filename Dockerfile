@@ -51,4 +51,4 @@ RUN apt-get update \
 # Switch back to dialog for any ad-hoc use of apt-get
 ENV DEBIAN_FRONTEND=
 
-ENV FLASK_APP=something FLASK_ENV=development
+ENV FLASK_APP=something
