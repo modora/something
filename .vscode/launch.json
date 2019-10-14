@@ -12,11 +12,18 @@
             "console": "integratedTerminal"
         },
         {
-            "name": "Debug file",
+            "name": "File",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
+        },
+        {
+            "name": "Module",
+            "type": "python",
+            "request": "launch",
+            "module": "something",
+            "program": "${file}"
         }
     ]
 }
