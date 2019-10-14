@@ -4,9 +4,8 @@ from . import api
 from . import db
 from . import middleware
 from . import __about__
+from .app_dirs import app_dirs
 from . import config
-
-app_dirs = __about__.app_dirs
 
 app = _Flask(__name__)
 
