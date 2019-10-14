@@ -1,6 +1,7 @@
 from flask import Flask as _Flask
 
 from . import api
+from . import db
 from . import middleware
 from . import __about__
 from . import config
