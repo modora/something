@@ -3,6 +3,8 @@ from pathlib import Path
 import os
 import json
 
+import appdirs
+
 import something
 
 logger = getLogger(__name__)
@@ -14,6 +16,7 @@ class FlaskConfig:
     """
 
     HOST = "0.0.0.0"
+    DATA_DIR = appdirs.site_data_dir(something.__name__, something.__author__)
 
 
 class DevConfig(FlaskConfig):
@@ -47,7 +50,9 @@ class TestConfig(FlaskConfig):
 def loadConfig(app):
     # Try to load in user config file; otherwise, use production config
     try:
-        config_dir = Path(something.app_dirs.site_config_dir)
+        config_dir = Path(
+            appdirs.site_config_dir(something.__name__, something.__author__)
+        )
         config_path_py = config_dir.joinpath("config.py")
         config_path_json = config_dir.joinpath("config.json")
 
