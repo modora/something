@@ -5,10 +5,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug server",
+            "name": "Python: Flask",
             "type": "python",
             "request": "launch",
-            "program": "${workspaceFolder}/server.py",
+            "module": "flask",
+            "env": {
+                "FLASK_APP": "something",
+                "FLASK_ENV": "development",
+                "FLASK_DEBUG": 1
+            },
+            "args": [
+                "run",
+                "--no-debugger",
+                "--no-reload", // The debugger breaks if this is not here
+                "--host=0.0.0.0" // Allow for debugging over external connections (e.g. docker-bridge)
+            ],
+            "jinja": true,
             "console": "integratedTerminal"
         },
         {
