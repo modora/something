@@ -1,4 +1,4 @@
-from flask import Blueprint, url_for
+import flask
 
 from . import collections
 from . import files
@@ -6,13 +6,14 @@ from . import user
 
 from flask import jsonify, request  # delete this later, placeholder responses
 
-bp = Blueprint("v1", __name__)
+bp = flask.Blueprint("v1", __name__)
 
 # Get a summary of all files in the archive
-@bp.route("/files", method=["GET"])
-@bp.route("/metadata/files", method=["GET"])
+@bp.route("/files", methods=["GET"])
+@bp.route("/metadata/files", methods=["GET"])
 def get_file_summary():
     return jsonify({"num_files": 1, "size": 2})
+
 
 # Get metadata summary for all collections
 @bp.route("/metadata/collections", methods=["GET"])
@@ -49,7 +50,9 @@ def get_collection_list():
 @bp.route("/files", methods=["POST"])
 @bp.route("/collections/files/items", methods=["POST"])
 def upload_file():
-    return jsonify({"file_id": "01234567"})
+    app = flask.current_app
+    request = flask.request
+    return jsonify(files.upload(app, request))
 
 
 # Deletes a file from the archive
@@ -72,20 +75,24 @@ def create_new_collection():
 def delete_collection(coll_id):
     return jsonify({"return_code": 0})
 
+
 # Get a list of items in the collection
 @bp.route("/collections/<coll_id>/items", methods=["GET"])
 def get_collection_items(coll_id):
     return jsonify({"items": ["item1", "item2"]})
+
 
 # Add a new item to the collection
 @bp.route("/collections/<coll_id>/items", methods=["POST"])
 def add_collection_item(coll_id):
     return jsonify({"item_id": "01234567"})
 
+
 # Remove an item from the collection
 @bp.route("/collections/<coll_id>/items/<item_id>", methods=["DELETE"])
 def delete_collection_item(coll_id, item_id):
-    return jsonify({"coll_id": coll_id,"item_id": item_id, "return_code": 0})
+    return jsonify({"coll_id": coll_id, "item_id": item_id, "return_code": 0})
+
 
 # Get file metadata
 @bp.route("/files/<file_id>")
@@ -142,20 +149,24 @@ def update_collection_metadata(coll_id):
 def delete_collection_metadata(coll_id):
     return jsonify({"coll_id": coll_id, "return_code": 0})
 
+
 # Get item metadata
 @bp.route("/collections/<coll_id>/items/<item_id>/metadata", methods=["POST"])
 def get_item_metadata(coll_id, item_id):
     return jsonify({"coll_id": coll_id, "item_id": item_id, "key1": "value1"})
+
 
 # Add item metadata
 @bp.route("/collections/<coll_id>/items/<item_id>/metadata", methods=["POST"])
 def set_item_metadata(coll_id, item_id):
     return jsonify({"coll_id": coll_id, "item_id": item_id, "key1": "value1"})
 
+
 # Update item metadata
 @bp.route("/collections/<coll_id>/items/<item_id>/metadata", methods=["POST"])
 def update_item_metadata(coll_id, item_id):
     return jsonify({"coll_id": coll_id, "item_id": item_id, "key": "new_value"})
+
 
 # Remove item metadata
 @bp.route("/collections/<coll_id>/items/<item_id>/metadata", methods=["POST"])
@@ -173,7 +184,6 @@ def search_archive():
 @bp.route("/user/auth", methods=["POST"])
 def authenticate():
     return "JWT"
-
 
 
 # Download a single file or collection as a zip

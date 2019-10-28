@@ -1,3 +1,4 @@
 flask
 appdirs
 pypika
+Flask-Uploads
